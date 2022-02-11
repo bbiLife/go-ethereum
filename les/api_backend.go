@@ -47,6 +47,10 @@ type LesApiBackend struct {
 	gpo                 *gasprice.Oracle
 }
 
+func (b *LesApiBackend) TransactionByHash(ctx context.Context, txHash common.Hash) (*types.Transaction, bool, error) {
+	return b.eth.txPool.GetTransaction(txHash), false, nil
+}
+
 func (b *LesApiBackend) ChainConfig() *params.ChainConfig {
 	return b.eth.chainConfig
 }

@@ -54,6 +54,11 @@ type testBackend struct {
 	chainFeed       event.Feed
 }
 
+func (b *testBackend) TransactionByHash(ctx context.Context, txHash common.Hash) (*types.Transaction, bool, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (b *testBackend) ChainDb() ethdb.Database {
 	return b.db
 }

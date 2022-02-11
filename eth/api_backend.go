@@ -19,6 +19,7 @@ package eth
 import (
 	"context"
 	"errors"
+	"github.com/ethereum/go-ethereum/log"
 	"math/big"
 	"time"
 
@@ -46,6 +47,11 @@ type EthAPIBackend struct {
 	allowUnprotectedTxs bool
 	eth                 *Ethereum
 	gpo                 *gasprice.Oracle
+}
+
+func (b *EthAPIBackend) TransactionByHash(ctx context.Context, txHash common.Hash) (*types.Transaction, bool, error) {
+	log.Info("EthAPIBackend TransactionByHash", "tx", txHash)
+	return b.eth.txPool.Get(txHash), false, nil
 }
 
 // ChainConfig returns the active chain configuration.
